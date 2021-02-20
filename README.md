@@ -26,7 +26,9 @@ sudo apt install redis-server
 ```
 git clone https://github.com/Nna2291/Django_1517
 redis-server //если у вас Mac OS или Linux
-Откройте новое окно терминала
+```
+#### Откройте новое окно терминала
+```
 cd Django_1517
 python -m venv venv
 source venv/bin/activate
