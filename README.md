@@ -4,7 +4,7 @@
 # Оглавление
 - [Установка redis-server](https://github.com/Nna2291/Django_1517#установка-redis-server)
 - [Установка и запуск](https://github.com/Nna2291/Django_1517#установка-и-запуск)
-- [Cостав-команды-альфа](https://github.com/Nna2291/Django_1517#состав-команды-альфа)
+- [Cостав команды альфа](https://github.com/Nna2291/Django_1517#состав-команды-альфа)
 - [Версии](https://github.com/Nna2291/Django_1517#версии)
 # Установка redis-server
 #### Mac OS:
