@@ -1,3 +1,7 @@
+import os
+
+from game_list_in_console import print_tic_tac_toe
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Game
@@ -33,11 +37,19 @@ def home(request):
 
 def play(request, room_code):
     username = request.GET.get('username')
-    trys = request.GET.get('space')
-    print('----')
-    print(trys)
-    print('----')
     create = Game.objects.all()
     new_create = create.last()
     context = {'room_code': room_code, 'username': username, 'create': new_create.game_creator}
     return render(request, 'play.html', context)
+
+
+def draw(request):
+    field = str(request)[35:len(str(request)) - 2].split('&selector_')
+    for i in range(9):
+        if len(field[i]) == 3:
+            field[i] = field[i][2]
+        else:
+            field[i] = ' '
+    os.system('clear')
+    print_tic_tac_toe(field)
+    return render(request, 'api.html')

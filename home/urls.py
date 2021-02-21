@@ -6,5 +6,5 @@ urlpatterns = [
 
     path('', home, name="home"),
     path('play/<room_code>', play, name="play"),
-
+    path('draw/', draw, name="draw")
 ]

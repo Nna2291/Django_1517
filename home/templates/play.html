@@ -1,208 +1,226 @@
 {% load static %}
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
+    <title>Игра | {{room_code}}</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
-    <title>Игра | {{room_code}}</title>
     <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-
+    <script type="text/javascript"
+            src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 </head>
-<body class="bg-dark">
-<div class="full-page" id="full-page">
-
-    <div class="game flex-column">
-        <div class="boardcontainer">
-            <div class="board">
-                <div data-cell-index="0" class="space"></div>
-                <div data-cell-index="1" class="space"></div>
-                <div data-cell-index="2" class="space"></div>
-                <div data-cell-index="3" class="space"></div>
-                <div data-cell-index="4" class="space"></div>
-                <div data-cell-index="5" class="space"></div>
-                <div data-cell-index="6" class="space"></div>
-                <div data-cell-index="7" class="space"></div>
-                <div data-cell-index="8" class="space"></div>
-
+<body class="bg-light">
+ <div class="full-page" id="full-page">
+        <div class="game flex-column">
+            <div class="boardcontainer">
+                <div class="board">
+                    <div data-cell-index="0" class="space"></div>
+                    <div data-cell-index="1" class="space"></div>
+                    <div data-cell-index="2" class="space"></div>
+                    <div data-cell-index="3" class="space"></div>
+                    <div data-cell-index="4" class="space"></div>
+                    <div data-cell-index="5" class="space"></div>
+                    <div data-cell-index="6" class="space"></div>
+                    <div data-cell-index="7" class="space"></div>
+                    <div data-cell-index="8" class="space"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
+{% csrf_token %}
 <script>
-    var room_code = '{{room_code}}'
-    var username = '{{username}}'
-    var checker = 0
-    console.log('{{create}}')
-    if (username == '{{create}}'){
-        var player = 'X';
-        var times = 'первым';
-    } else {
-        var player = 'O';
-        var times = 'вторым';
-    }
 
-    let socket = new WebSocket('ws://localhost:8000/ws/game/' + room_code)
+var room_code = '{{room_code}}'
+var username = '{{username}}'
+var checker = 0
+console.log('{{create}}')
+if (username == '{{create}}'){
+    var player = 'X';
+    var times = 'первым';
+} else {
+    var player = 'O';
+    var times = 'вторым';
+}
 
-    let GameField = ["","","","","","","","",""]
+let socket = new WebSocket('ws://localhost:8000/ws/game/' + room_code)
 
-    let elementArray = document.querySelectorAll('.space')
+let GameField = ["","","","","","","","",""]
 
-    swal("Вы играете за "+player,"Вы ходите " + times , "success")
+let elementArray = document.querySelectorAll('.space')
 
-
-    //setText(event.path[0].getAttribute('data-cell-index') , player);
+swal("Вы играете за "+player,"Вы ходите " + times , "success")
 
 
+//setText(event.path[0].getAttribute('data-cell-index') , player);
 
 
-    elementArray.forEach(function(elem){
-        elem.addEventListener("click" , function (event){
-        var countww = 0;
-        GameField.map((game)=>{
-            if(game != ""){
-                countww++;
-            }
-        })
-        if (countww % 2 == 0 && player == 'X'){
-            setText(event.path[0].getAttribute('data-cell-index') , player);
-        }else if (countww % 2 != 0 && player == 'O'){
-           setText(event.path[0].getAttribute('data-cell-index') , player); 
-        }else{
-            console.log('No!')
-       }
-        })    
+
+
+elementArray.forEach(function(elem){
+    elem.addEventListener("click" , function (event){
+    var countww = 0;
+    GameField.map((game)=>{
+        if(game != ""){
+            countww++;
+        }
+    })
+    if (countww % 2 == 0 && player == 'X'){
+        setText(event.path[0].getAttribute('data-cell-index') , player);
+
+        $.ajax(
+          "/draw/?" + $.param({ selector_0: GameField[0],
+                                selector_1: GameField[1],
+                                selector_2: GameField[2],
+                                selector_3: GameField[3],
+                                selector_4: GameField[4],
+                                selector_5: GameField[5],
+                                selector_6: GameField[6],
+                                selector_7: GameField[7],
+                                selector_8: GameField[8],
+                            }),
+              
+        );    
+    }else if (countww % 2 != 0 && player == 'O'){
+       setText(event.path[0].getAttribute('data-cell-index') , player);
+
+        $.ajax(
+          "/draw/?" + $.param({ selector_0: GameField[0],
+                                selector_1: GameField[1],
+                                selector_2: GameField[2],
+                                selector_3: GameField[3],
+                                selector_4: GameField[4],
+                                selector_5: GameField[5],
+                                selector_6: GameField[6],
+                                selector_7: GameField[7],
+                                selector_8: GameField[8],
+                            }),
+              
+        );    
+    }else{
+        swal("Не ваш ход!", "Сейчас вы не можете сделать ход!", "error");
+   }
+    })
+})
+
+
+function GameEndChecker(){
+    var count = 0;
+    GameField.map((game)=>{
+        if(game != ""){
+            count++;
+        }
     })
 
+    if(count >= 9){
+        var data = {'type' : 'over'}
+        socket.send(JSON.stringify({data}))
+        swal("Ничья!" , "Никто не выиграл!" , "warning")
+    }
+}
 
-    function GameEndChecker(){
-        var count = 0;
-        GameField.map((game)=>{
-            if(game != ""){
-                count++;
-            }
-        })
+function checkWon(value , player){
+    var won = false;
 
-        if(count >= 9){
-            var data = {'type' : 'over'}
-            socket.send(JSON.stringify({data}))
-            swal("Ничья!" , "Никто не выиграл!" , "warning")
-        }
+    if(GameField[0] === value && GameField[1] == value && GameField[2] == value){
+        won = true;
+    }else if(GameField[3] === value && GameField[4] == value && GameField[5] == value){
+        won = true
+    }else if(GameField[6] === value && GameField[7] == value && GameField[8] == value){
+        won = true
+    }
+    else if(GameField[0] === value && GameField[3] == value && GameField[6] == value){
+        won = true
+    }
+    else if(GameField[1] === value && GameField[4] == value && GameField[7] == value){
+        won = true
+    }else if(GameField[2] === value && GameField[5] == value && GameField[8] == value){
+        won = true
+    }
+    else if(GameField[0] === value && GameField[4] == value && GameField[8] == value){
+        won = true
+    }
+    else if(GameField[2] === value && GameField[4] == value && GameField[6] == value){
+        won = true
     }
 
-    function checkWon(value , player){
-        var won = false;
-
-        if(GameField[0] === value && GameField[1] == value && GameField[2] == value){
-            won = true;
-        }else if(GameField[3] === value && GameField[4] == value && GameField[5] == value){
-            won = true
-        }else if(GameField[6] === value && GameField[7] == value && GameField[8] == value){
-            won = true
-        }
-        else if(GameField[0] === value && GameField[3] == value && GameField[6] == value){
-            won = true
-        }
-        else if(GameField[1] === value && GameField[4] == value && GameField[7] == value){
-            won = true
-        }else if(GameField[2] === value && GameField[5] == value && GameField[8] == value){
-            won = true
-        }
-        else if(GameField[0] === value && GameField[4] == value && GameField[8] == value){
-            won = true
-        }
-        else if(GameField[2] === value && GameField[4] == value && GameField[6] == value){
-            won = true
-        }
-
-        if(won){
-            var data = {'type' : 'end' , 'player' : player}
-            socket.send(JSON.stringify({data}))
-            swal("Победа!" , "Игрок с ником " + username + " выиграл!" , "success")
-        }
-
-        GameEndChecker();
-
+    if(won){
+        var data = {'type' : 'end' , 'player' : player}
+        socket.send(JSON.stringify({data}))
+        swal("Победа!" , "Игрок с ником " + username + " выиграл!" , "success")
     }
 
+    GameEndChecker();
+
+}
 
 
-    function setText(index , value){
-        var data = {
-        'player' : player,
-        'index' : index,
-        'type' : 'running'
-        }
 
-
-        if(GameField[parseInt(index)] == ""){
-        GameField[parseInt(index)] = value
-        elementArray[parseInt(index)].innerHTML = value
-
-        socket.send(JSON.stringify({
-            data
-        }))
-        checkWon(value , player )
-        }else{
-            alert("Вы не можете занять это место")
-        }
-        
-
+function setText(index , value){
+    var data = {
+    'player' : player,
+    'index' : index,
+    'type' : 'running'
     }
 
 
-    function setAnotherUserText(index , value){
-        GameField[parseInt(index)] = value
-        elementArray[parseInt(index)].innerHTML = value
+    if(GameField[parseInt(index)] == ""){
+    GameField[parseInt(index)] = value
+    elementArray[parseInt(index)].innerHTML = value
+
+    socket.send(JSON.stringify({
+        data
+    }))
+    checkWon(value , player )
+    }else{
+        alert("Вы не можете занять это место")
     }
 
-    $.ajax({
-    url: '/event/save-json/',
-    type: 'POST',
-    contentType: 'application/json; charset=utf-8',
-    data: $.toJSON(GameField),
-    dataType: 'text',
-    success: function(result) {
-        alert(result.Result);
-        }
-    });
 
-    socket.onopen = function (e){
-        console.log('Сокет соединен')
+}
+
+
+function setAnotherUserText(index , value){
+    GameField[parseInt(index)] = value
+    elementArray[parseInt(index)].innerHTML = value
+}
+
+
+socket.onopen = function (e){
+    console.log('Сокет соединен')
+    console.log(JSON.parse(e.data))
+}
+
+socket.onmessage = function (e){
+    var data = JSON.parse(e.data)
+    console.log(data)
+    if(data.payload.type == 'end' && data.payload.player !== player){
+        swal("Проигрыш!" , "К сожалению вы проиграли" , "error")
+    }else if(data.payload.type == 'over'){
+        swal("Ничья!" , "Никто не выиграл!" , "warning")
+        return;
+    }else if(data.payload.type == 'running' &&  data.payload.player !== player){
+        setAnotherUserText(data.payload.index , data.payload.player)
     }
 
-    socket.onmessage = function (e){
-        var data = JSON.parse(e.data)
-        console.log(data)
-        if(data.payload.type == 'end' && data.payload.player !== player){
-            swal("Проигрыш!" , "К сожалению вы проиграли" , "error")
-        }else if(data.payload.type == 'over'){
-            swal("Ничья!" , "Никто не выиграл!" , "warning")
-            return;
-        }else if(data.payload.type == 'running' &&  data.payload.player !== player){
-            setAnotherUserText(data.payload.index , data.payload.player)
-        }
+
+
+}
+
+socket.onclose = function (e){
+    console.log('Сокет закрыт')
+}
 
 
 
-    }
 
-    socket.onclose = function (e){
-        console.log('Сокет закрыт')
-    }
 </script>
+
 </body>
 
 </html>
