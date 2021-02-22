@@ -1,5 +1,10 @@
 var checker = 0
-if (window.username == window.creater) {
+var username = document.getElementById('username').innerHTML
+var creater = document.getElementById('create').innerHTML
+var room_code = document.getElementById('room_code').innerHTML
+console.log(username)
+console.log(creater)
+if (username == creater) {
     var player = 'X';
     var times = 'первым';
 } else {
@@ -7,7 +12,7 @@ if (window.username == window.creater) {
     var times = 'вторым';
 }
 
-let socket = new WebSocket('ws://localhost:8000/ws/game/' + window.room_code)
+let socket = new WebSocket('ws://localhost:8000/ws/game/' + room_code)
 
 let GameField = ["","","","","","","","",""]
 
@@ -111,7 +116,7 @@ function checkWon(value , player){
     if(won){
         var data = {'type' : 'end' , 'player' : player}
         socket.send(JSON.stringify({data}))
-        swal("Победа!" , "Игрок с ником " + window.username + " выиграл!" , "success")
+        swal("Победа!" , "Игрок с ником " + username + " выиграл!" , "success")
     }
 
     GameEndChecker();
