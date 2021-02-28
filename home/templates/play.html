@@ -1,42 +1,45 @@
 {% load static %}
-<html lang="en">
+    <html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <title>Игра | {{room_code}}</title>
+            <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous">
+            <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+                <script type="text/javascript"
+                src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+            </head>
+            <body class="bg-light">
+                <div style="visibility: hidden; font-size: 1px", id="room_code">{{room_code}}</div>
+                    <div style="visibility: hidden; font-size: 1px", id="username">{{username}}</div>
+                        <div style="visibility: hidden; font-size: 1px", id="create">{{create}}</div>
+                            <div class="lls">
+                                <div class="full-page" id="full-page">
+                                    <div class="game flex-column">
+                                        <div class="boardcontainer">
+                                            <div class="board">
+                                                <div data-cell-index="0" class="space"></div>
+                                                <div data-cell-index="1" class="space"></div>
+                                                <div data-cell-index="2" class="space"></div>
+                                                <div data-cell-index="3" class="space"></div>
+                                                <div data-cell-index="4" class="space"></div>
+                                                <div data-cell-index="5" class="space"></div>
+                                                <div data-cell-index="6" class="space"></div>
+                                                <div data-cell-index="7" class="space"></div>
+                                                <div data-cell-index="8" class="space"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                            <script src="{% static 'home/js/script.js' %}"></script>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Игра | {{room_code}}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-</head>
+                            </body>
 
-<body class="bg-light">
-    <div style="visibility: hidden; font-size: 1px" , id="room_code">{{room_code}}</div>
-    <div style="visibility: hidden; font-size: 1px" , id="username">{{username}}</div>
-    <div style="visibility: hidden; font-size: 1px" , id="create">{{create}}</div>
-    <div class="full-page" id="full-page">
-        <div class="game flex-column">
-            <div class="boardcontainer">
-                <div class="board">
-                    <div data-cell-index="0" class="space"></div>
-                    <div data-cell-index="1" class="space"></div>
-                    <div data-cell-index="2" class="space"></div>
-                    <div data-cell-index="3" class="space"></div>
-                    <div data-cell-index="4" class="space"></div>
-                    <div data-cell-index="5" class="space"></div>
-                    <div data-cell-index="6" class="space"></div>
-                    <div data-cell-index="7" class="space"></div>
-                    <div data-cell-index="8" class="space"></div>
-                </div>
-            </div>
-        </div>
-        <button style="position: relative; left:10%; margin-bottom:150px;" type="reset" class="btn btn-dark">Restart</button>
-    </div>
-    <!--<div>
-        <button style="position: relative; left:48%;" type="reset" class="btn btn-dark">Restart</button>
-    </div>-->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="{% static 'home/js/script.js' %}"></script>
-</body>
-
-</html>
+                            </html>

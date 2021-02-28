@@ -1,7 +1,6 @@
 import os
 
-from game_list_in_console import print_tic_tac_toe
-from django.http import JsonResponse
+from home.game_scoreboard import print_tic_tac_toe
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Game
@@ -44,6 +43,7 @@ def play(request, room_code):
 
 
 def draw(request):
+
     field = str(request)[35:len(str(request)) - 2].split('&selector_')
     for i in range(9):
         if len(field[i]) == 3:

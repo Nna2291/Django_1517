@@ -1,5 +1,5 @@
 """
-ASGI config for tictac project.
+ASGI config for django1517 project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -14,7 +14,7 @@ from home.consumers import GameRoom
 from django.core.asgi import get_asgi_application
 from django.urls import path
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tictac.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django1517.settings')
 
 application = get_asgi_application()
 
