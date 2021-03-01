@@ -1,33 +1,23 @@
 # Команда Альфа
 
 Работа команды Альфа Школы №1517
+
+**Проект сделан под RaspberryPi с установленной операционной системой Raspberry Pi OS**
 # Оглавление
 - [Установка redis-server](https://github.com/Nna2291/Django_1517#установка-redis-server)
 - [Установка и запуск](https://github.com/Nna2291/Django_1517#установка-и-запуск)
 - [Авторы](https://github.com/Nna2291/Django_1517#состав-команды-альфа)
 - [Версии](https://github.com/Nna2291/Django_1517#версии)
 # Установка redis-server
-#### Mac OS:
-Если у вас нет менеджера *Homebrew* то установите его командой:
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-Потом введите в терминале следующую команду:
-```
-brew install redis
-```
-#### Linux:
+#### Raspberry Pi OS:
 
 ```
 sudo apt install redis-server
 ```
-
-#### Windows:
-Скачайте файл [Redis-x64-3.2.100.zip](https://github.com/MSOpenTech/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.zip), разархивируйте и запустите файл redis-server.exe
 ## Установка и запуск
 ```
 git clone https://github.com/Nna2291/Django_1517
-redis-server //если у вас Mac OS или Linux
+redis-server
 ```
 Откройте новое окно терминала
 ```
@@ -40,7 +30,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-После этого перейдите на сайт http://0.0.0.0:8000/
+После этого следуйте указаниям в консоли
 
 ## Состав команды Альфа
 Учреждение:
