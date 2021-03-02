@@ -2,8 +2,6 @@ var checker = 0
 var username = document.getElementById('username').innerHTML
 var creater = document.getElementById('create').innerHTML
 var room_code = document.getElementById('room_code').innerHTML
-console.log(username)
-console.log(creater)
 if (username == creater) {
     var player = 'X';
     var times = 'первым';
@@ -156,8 +154,8 @@ function setAnotherUserText(index , value){
 
 
 socket.onopen = function (e){
-    console.log('Сокет соединен')
-    console.log(JSON.parse(e.data))
+    console.log('Сокет соединен');
+    console.log(JSON.parse(e.data));
 }
 
 socket.onmessage = function (e){
