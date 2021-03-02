@@ -1,6 +1,6 @@
 import os
 
-from home.game_scoreboard import print_tic_tac_toe
+from home.game_scoreboard import print_game
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -53,5 +53,5 @@ def draw(request):
         else:
             field[i] = ' '
     os.system('clear')
-    print_tic_tac_toe(field)
+    print_game(field)
     return render(request, 'api.html')

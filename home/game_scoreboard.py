@@ -1,4 +1,4 @@
-def print_tic_tac_toe(values):
+def print_game(values):
     print("\n")
     print("\t     |     |")
     print("\t  {}  |  {}  |  {}".format(values[0], values[1], values[2]))
